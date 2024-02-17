@@ -7,5 +7,32 @@
 }
 
 body {
-  margin: 0;
+  background: rgb(232, 232, 232);
+  background: linear-gradient(
+    49deg,
+    rgba(232, 232, 232, 1) 40%,
+    rgba(228, 208, 189, 1) 54%,
+    rgba(227, 204, 181, 1) 65%,
+    rgba(161, 173, 181, 1) 81%,
+    rgba(150, 168, 181, 1) 87%,
+    rgba(153, 173, 189, 1) 90%,
+    rgba(169, 200, 231, 1) 100%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2d3748;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #718096;
 }
