@@ -22,7 +22,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 interface CustomizedDialogsProps {
   title: string;
-  action: "Add" | "Edit" | "Delete";
+  action: "Add" | "Edit" | "Delete" | "Role";
   currentUser?: UserType;
   setCurrentUserIndex?: React.Dispatch<React.SetStateAction<number>>;
   handleCurrentUser?: (action: string, user?: UserType) => void;
@@ -32,6 +32,7 @@ interface CustomizedDialogsProps {
 
 const defaultProduct = {
   name: "",
+  email: "",
   age: "",
   mobile: "",
   role: "",
@@ -66,6 +67,7 @@ export default function CustomizedDialogs({
           promise = addUser;
           break;
         case "Edit":
+        case "Role":
           user._id = currentUser?._id;
           promise = editUser;
           break;
@@ -125,7 +127,7 @@ export default function CustomizedDialogs({
             <CloseIcon />
           </IconButton>
           <DialogContent dividers>
-            {action !== "Delete" ? (
+            {action !== "Delete" && action !== "Role" ? (
               <>
                 <TextField
                   required
@@ -145,15 +147,31 @@ export default function CustomizedDialogs({
                   }}
                 />
                 <TextField
-                  id="filled-multiline-static"
-                  label="Age"
-                  multiline
-                  fullWidth
                   required
-                  rows={4}
+                  fullWidth
+                  id="filled-required"
+                  label="Email"
+                  sx={{ mt: 1 }}
+                  defaultValue={user.email}
+                  variant="filled"
+                  InputLabelProps={{
+                    style: { color: "#0e0e0e" },
+                  }}
+                  onChange={(e) => {
+                    setUser({
+                      ...user,
+                      email: e.target.value,
+                    });
+                  }}
+                />
+                <TextField
+                  required
+                  fullWidth
+                  id="filled-required"
+                  label="Age"
+                  sx={{ mt: 1 }}
                   defaultValue={user.age}
                   variant="filled"
-                  sx={{ mt: 1 }}
                   InputLabelProps={{
                     style: { color: "#0e0e0e" },
                   }}
@@ -171,6 +189,7 @@ export default function CustomizedDialogs({
                   label="Mobile"
                   defaultValue={user.mobile}
                   variant="filled"
+                  sx={{ mt: 1 }}
                   InputLabelProps={{
                     style: { color: "#0e0e0e" },
                   }}
@@ -178,6 +197,28 @@ export default function CustomizedDialogs({
                     setUser({
                       ...user,
                       mobile: e.target.value,
+                    });
+                  }}
+                />
+              </>
+            ) : action === "Role" ? (
+              <>
+                {" "}
+                <TextField
+                  required
+                  fullWidth
+                  id="filled-required"
+                  label="Role"
+                  sx={{ mt: 1 }}
+                  defaultValue={user.role}
+                  variant="filled"
+                  InputLabelProps={{
+                    style: { color: "#0e0e0e" },
+                  }}
+                  onChange={(e) => {
+                    setUser({
+                      ...user,
+                      role: e.target.value,
                     });
                   }}
                 />
@@ -201,7 +242,11 @@ export default function CustomizedDialogs({
               onClick={handleSaveProduct}
               sx={{ color: action === "Delete" ? "#f54545" : "#0e0e0e" }}
             >
-              {action === "Add" ? "Add" : action === "Edit" ? "Save" : "Delete"}
+              {action === "Add"
+                ? "Add"
+                : action === "Delete"
+                ? "Delete"
+                : "Save"}
             </Button>
           </DialogActions>
         </BootstrapDialog>

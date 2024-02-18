@@ -147,6 +147,7 @@ const NavItems = () => {
               <AdjustIcon color="primary" />
             </ListItemIcon>
             <ListItemText
+              onClick={() => navigate("/dashboard/user/role")}
               disableTypography
               primary={
                 <Typography
@@ -177,7 +178,10 @@ const NavItems = () => {
               }
             />
           </ListItemButton>
-          <ListItemButton sx={{ mb: { md: "8px", sm: "0px" } }}>
+          <ListItemButton
+            onClick={() => navigate("/dashboard/user/profile")}
+            sx={{ mb: { md: "8px", sm: "0px" } }}
+          >
             <ListItemIcon sx={{ minWidth: "36px" }}>
               <SettingsIcon color="primary" />
             </ListItemIcon>
@@ -196,7 +200,10 @@ const NavItems = () => {
         </Grid>
 
         <Grid>
-          <ListItemButton sx={{ mb: { md: "8px", sm: "0px" } }}>
+          <ListItemButton
+            onClick={() => navigate("/dashboard/profile")}
+            sx={{ mb: { md: "8px", sm: "0px" } }}
+          >
             <ListItemIcon sx={{ minWidth: "36px" }}>
               <PersonIcon color="primary" />
             </ListItemIcon>
@@ -212,7 +219,13 @@ const NavItems = () => {
               }
             />
           </ListItemButton>
-          <ListItemButton sx={{ mb: { md: "8px", sm: "0px" } }}>
+          <ListItemButton
+            onClick={() => {
+              localStorage.removeItem("userId");
+              navigate("/");
+            }}
+            sx={{ mb: { md: "8px", sm: "0px" } }}
+          >
             <ListItemIcon sx={{ minWidth: "36px" }}>
               <LogoutIcon color="primary" />
             </ListItemIcon>

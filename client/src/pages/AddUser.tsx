@@ -22,7 +22,14 @@ import { UserType } from "../utils/constants";
 import { getAllUsers } from "../services/services";
 
 const AddUser = () => {
-  const headers: string[] = ["Name", "Age", "Mobile", "Role", "Action"];
+  const headers: string[] = [
+    "Name",
+    "Email",
+    "Age",
+    "Mobile",
+    "Role",
+    "Action",
+  ];
 
   const [users, setUsers] = useState<Array<UserType>>([]);
   const [currentUserIndex, setCurrentUserIndex] = useState<number>(-1);
@@ -92,7 +99,7 @@ const AddUser = () => {
     setShowToast({ value: true, action });
   };
   return (
-    <Box sx={{ p: 10, pb: 10, minHeight: "500px" }}>
+    <Box sx={{ pb: 2, minHeight: "500px" }}>
       <Container maxWidth="xl">
         <Box
           alignItems={"center"}
@@ -125,7 +132,7 @@ const AddUser = () => {
           </Button>
         </Box>
 
-        <TableContainer component={Paper} sx={{ maxHeight: 350 }}>
+        <TableContainer component={Paper} sx={{ maxHeight: 500 }}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table" stickyHeader>
             <TableHead>
               <TableRow>
@@ -143,6 +150,7 @@ const AddUser = () => {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell align="left">{user.name}</TableCell>
+                  <TableCell align="left">{user.email}</TableCell>
                   <TableCell align="left">{user.age}</TableCell>
                   <TableCell align="left">{user.mobile}</TableCell>
                   <TableCell align="left">{user.role || "None"}</TableCell>
